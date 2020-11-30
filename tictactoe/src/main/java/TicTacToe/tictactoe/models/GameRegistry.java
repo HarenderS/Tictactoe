@@ -27,4 +27,8 @@ public class GameRegistry {
 	public Boolean isUndoable() {
 		return this.firstPrevious < this.mementos.size() - 1;
 	}
+
+	public void undo() {
+		
+	}
 }
