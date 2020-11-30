@@ -1,6 +1,7 @@
 package TicTacToe.utils;
 
-import static org.junit.Assert.assertEquals;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 import java.io.BufferedReader;
@@ -11,8 +12,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-
-import TicTacToe.utils.Console;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ConsoleTest {
