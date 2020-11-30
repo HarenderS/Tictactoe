@@ -1,6 +1,7 @@
 package TicTacToe.tictactoe.models;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.Before;
@@ -37,7 +38,7 @@ public class GameMementoTest {
 	}
 	
 	@Test
-	public void setBoardNullMementoTest() {
+	public void setBoardAndGetNotNullMementoTest() {
 		GameMemento gameMemento = new GameMemento(this.board,this.turn);
 		assertNotNull(gameMemento.getBoard());
 	}
@@ -46,5 +47,11 @@ public class GameMementoTest {
 	public void setTurnAndGetNotNullMementoTest() {
 		GameMemento gameMemento = new GameMemento(this.board,this.turn);
 		assertNotNull(gameMemento.getBoard());
+	}
+	
+	@Test
+	public void setBoardAndGetSameBoardMementoTest() {
+		GameMemento gameMemento = new GameMemento(this.board,this.turn);
+		assertEquals(this.board,gameMemento.getBoard());
 	}
 }
