@@ -6,7 +6,6 @@ import org.junit.Test;
 
 public class GameMementoTest {
 
-	
 	@Test
 	public void getBoardNullMementoTest() {
 		GameMemento gameMemento = new GameMemento();
@@ -14,4 +13,10 @@ public class GameMementoTest {
 		
 	}
 	
+	@Test
+	public void getTurnNullMementoTest() {
+		GameMemento gameMemento = new GameMemento();
+		assertNull(gameMemento.getTurn());
+		
+	}
 }
