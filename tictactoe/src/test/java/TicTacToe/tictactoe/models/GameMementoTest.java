@@ -1,5 +1,6 @@
 package TicTacToe.tictactoe.models;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.Before;
@@ -33,5 +34,19 @@ public class GameMementoTest {
 	public void setTurnAndGetCopyOfTurnMementoTest() {
 		GameMemento gameMemento = new GameMemento(this.board,this.turn);
 		assertNotEquals(this.turn,gameMemento.getTurn());
+	}
+	
+	@Test
+	public void setTurnWithPlayerChangedAndGetCopyMementoTest() {
+		GameMemento gameMemento1 = new GameMemento(this.board,this.turn);
+		
+		this.turn.change();
+		GameMemento gameMemento2 = new GameMemento(this.board,this.turn);
+		
+		assertNotEquals(this.turn.getPlayer(),gameMemento1.getTurn().getPlayer());
+		assertNotEquals(gameMemento1.getTurn().getPlayer(),gameMemento2.getTurn().getPlayer());
+		assertEquals(this.turn.getOtherPlayer(),gameMemento1.getTurn().getPlayer());
+		assertEquals(this.turn.getPlayer(),gameMemento2.getTurn().getPlayer());
+		
 	}
 }
