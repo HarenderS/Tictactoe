@@ -54,4 +54,10 @@ public class GameMementoTest {
 		GameMemento gameMemento = new GameMemento(this.board,this.turn);
 		assertEquals(this.board,gameMemento.getBoard());
 	}
+	
+	@Test
+	public void setTurnAndGetSameTurnMementoTest() {
+		GameMemento gameMemento = new GameMemento(this.board,this.turn);
+		assertEquals(this.turn,gameMemento.getTurn());
+	}
 }
