@@ -32,4 +32,8 @@ public class GameRegistry {
 		this.firstPrevious++;
 	    this.game.set(this.mementos.get(this.firstPrevious));
 	}
+
+	public Boolean isRedoable() {
+		return true;
+	}
 }

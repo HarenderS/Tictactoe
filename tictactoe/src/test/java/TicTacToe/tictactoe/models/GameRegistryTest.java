@@ -56,6 +56,16 @@ public class GameRegistryTest {
 		this.registry.undo();
 		assertEquals(Token.NULL, this.game.getToken(at(0, 2)));
 	}
+	
+	@Test
+	public void checkIsRedoableTest() {
+		Game game1 = new Game();
+		game1.setUsers(2);
+		game1.put(at(0, 0));
+		GameRegistry registry1 = new GameRegistry(game1);
+		registry1.register();
+		assertTrue(registry1.isRedoable());
+	}
 
 	private Coordinate at(int row, int col) {
 		return new Coordinate(row, col);
