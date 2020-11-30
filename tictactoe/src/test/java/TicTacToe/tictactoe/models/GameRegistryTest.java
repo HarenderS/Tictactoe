@@ -24,6 +24,10 @@ public class GameRegistryTest {
 		this.registry.register();
 	}
 	
+	@Test
+	public void checkIsUndoableTest() {
+		assertTrue(this.registry.isUndoable());
+	}
 	
 	private Coordinate at(int row, int col) {
 		return new Coordinate(row, col);

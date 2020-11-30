@@ -2,7 +2,6 @@ package TicTacToe.tictactoe.models;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BooleanSupplier;
 
 public class GameRegistry {
 
@@ -25,4 +24,7 @@ public class GameRegistry {
 		this.mementos.add(this.firstPrevious, this.game.createMemento());
 	}
 
+	public Boolean isUndoable() {
+		return true;
+	}
 }
