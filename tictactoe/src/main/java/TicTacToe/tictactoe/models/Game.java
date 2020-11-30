@@ -85,4 +85,8 @@ public class Game {
         this.players = new Player[Turn.NUM_PLAYERS];
         this.turn = new Turn(this.players);
 	}
+    
+    public GameMemento createMemento() {
+        return new GameMemento(this.board, this.turn);
+	}
 }
