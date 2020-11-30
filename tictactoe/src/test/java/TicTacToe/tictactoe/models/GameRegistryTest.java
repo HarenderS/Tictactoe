@@ -1,5 +1,6 @@
 package TicTacToe.tictactoe.models;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -14,10 +15,11 @@ public class GameRegistryTest {
 	@Before
 	public void test() {
 		this.game = new Game();
+		this.game.createPlayers(2);
 		this.registry = new GameRegistry(this.game);
 	}
 
-	@Test(expected = Exception.class)
+	@Test
 	public void registerGameAndCheckValuesTest() {
 		assertNull(this.game.getToken(at(0, 0)));
 		this.game.putTokenPlayerFromTurn(at(0,0));
@@ -26,9 +28,20 @@ public class GameRegistryTest {
 	
 	@Test
 	public void checkIsUndoableTest() {
-		assertTrue(this.registry.isUndoable());
+		Game game1 = new Game();
+		game1.createPlayers(2);
+		game1.putTokenPlayerFromTurn(at(0, 0));
+		GameRegistry registry1 = new GameRegistry(game1);
+		registry1.register();
+		assertTrue(registry1.isUndoable());
 	}
-	
+
+	@Test
+	public void checkIsNotUndoableTest() {
+		GameRegistry registry1 = new GameRegistry(new Game());
+		assertFalse(registry1.isUndoable());
+	}
+
 	private Coordinate at(int row, int col) {
 		return new Coordinate(row, col);
 	}
