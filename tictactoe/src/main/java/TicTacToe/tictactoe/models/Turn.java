@@ -13,6 +13,11 @@ public class Turn {
 		this.players = players;
 	}
 
+	public Turn(Turn turn) {
+		this.value = turn.value;
+		this.players = turn.players;
+	}
+
 	void change() {
 		this.value = this.getOtherValue();
 	}
@@ -31,6 +36,10 @@ public class Turn {
 
 	Player getOtherPlayer() {
 		return this.players[this.getOtherValue()];
+	}
+
+	public Turn copy() {
+		return new Turn(this);
 	}
 
 }

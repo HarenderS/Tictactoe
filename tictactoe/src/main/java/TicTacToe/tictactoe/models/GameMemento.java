@@ -7,7 +7,7 @@ public class GameMemento {
 	
 	public GameMemento(Board board, Turn turn) {
 		this.board = board.copy();
-		this.turn = turn;
+		this.turn = turn.copy();
 	}
 
 	public Turn getTurn() {
