@@ -34,6 +34,6 @@ public class GameRegistry {
 	}
 
 	public Boolean isRedoable() {
-		return true;
+		return this.firstPrevious >= 1;
 	}
 }

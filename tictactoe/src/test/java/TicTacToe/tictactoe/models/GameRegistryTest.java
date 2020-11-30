@@ -62,8 +62,14 @@ public class GameRegistryTest {
 		Game game1 = new Game();
 		game1.setUsers(2);
 		game1.put(at(0, 0));
+		game1.put(at(0, 1));
+		game1.put(at(1, 1));
 		GameRegistry registry1 = new GameRegistry(game1);
 		registry1.register();
+		assertEquals(Token.O, game1.getToken(at(1, 1)));
+		registry1.undo();
+		assertEquals(Token.NULL, game1.getToken(at(0, 2)));
+		
 		assertTrue(registry1.isRedoable());
 	}
 	
@@ -74,6 +80,8 @@ public class GameRegistryTest {
 		GameRegistry registry1 = new GameRegistry(game1);
 		assertFalse(registry1.isRedoable());
 	}
+	
+	
 
 	private Coordinate at(int row, int col) {
 		return new Coordinate(row, col);
