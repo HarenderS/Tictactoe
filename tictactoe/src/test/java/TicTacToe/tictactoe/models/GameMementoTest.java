@@ -47,6 +47,15 @@ public class GameMementoTest {
 		assertNotEquals(gameMemento1.getTurn().getPlayer(),gameMemento2.getTurn().getPlayer());
 		assertEquals(this.turn.getOtherPlayer(),gameMemento1.getTurn().getPlayer());
 		assertEquals(this.turn.getPlayer(),gameMemento2.getTurn().getPlayer());
+	}
+	
+	@Test
+	public void setTurnWithBoardChangedAndGetPlayerBoardChangedMementoTest() {
+		this.board.put(new Coordinate(1, 2), Token.TOKEN_X);
 		
+		GameMemento gameMemento = new GameMemento(this.board,this.turn);
+		
+		assertEquals(this.turn.getPlayer(),gameMemento.getTurn().getPlayer());
+		assertEquals(this.board, gameMemento.getTurn().getPlayer().getBoard());
 	}
 }
