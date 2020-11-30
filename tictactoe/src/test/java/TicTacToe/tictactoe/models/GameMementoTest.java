@@ -6,22 +6,18 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import TicTacToe.tictactoe.types.PlayerType;
 import TicTacToe.tictactoe.types.Token;
 
 public class GameMementoTest {
 
 	private Board board;
-	private Player[] player;
 	private Turn turn;
 	
 	@Before
 	public void before() {
 		this.board = new Board();
-		this.player = new Player[2];
-        this.player[0] = new Player(Token.values()[0], this.board, PlayerType.USER_PLAYER);
-        this.player[1] = new Player(Token.values()[1], this.board, PlayerType.MACHINE_PLAYER);
-        this.turn = new Turn(this.player);
+        this.turn = new Turn(this.board);
+        this.turn.setUsers(2);
 	}
 	
 	@Test
@@ -40,7 +36,7 @@ public class GameMementoTest {
 	public void setTurnWithPlayerChangedAndGetCopyMementoTest() {
 		GameMemento gameMemento1 = new GameMemento(this.board,this.turn);
 		
-		this.turn.change();
+		this.turn.next();
 		GameMemento gameMemento2 = new GameMemento(this.board,this.turn);
 		
 		assertNotEquals(this.turn.getPlayer(),gameMemento1.getTurn().getPlayer());
@@ -51,7 +47,7 @@ public class GameMementoTest {
 	
 	@Test
 	public void setTurnWithBoardChangedAndGetPlayerBoardChangedMementoTest() {
-		this.board.put(new Coordinate(1, 2), Token.TOKEN_X);
+		this.board.put(new Coordinate(1, 2), Token.X);
 		
 		GameMemento gameMemento = new GameMemento(this.board,this.turn);
 		

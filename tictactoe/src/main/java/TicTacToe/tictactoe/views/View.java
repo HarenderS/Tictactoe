@@ -1,11 +1,12 @@
 package TicTacToe.tictactoe.views;
 
-import TicTacToe.tictactoe.controllers.Controller;
-import TicTacToe.tictactoe.controllers.ControllersVisitor;
 
-public abstract class View implements ControllersVisitor {
+import TicTacToe.tictactoe.controllers.ControllerVisitor;
+import TicTacToe.tictactoe.controllers.UseCaseController;
 
-    public void interact(Controller controller) {
+public abstract class View implements ControllerVisitor {
+
+    public void interact(UseCaseController controller) {
 		controller.accept(this);
 	}
 }

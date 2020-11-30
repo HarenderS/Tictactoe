@@ -1,13 +1,19 @@
 package TicTacToe.tictactoe.views.console;
 
 import TicTacToe.tictactoe.controllers.ResumeController;
-import TicTacToe.tictactoe.views.MessageView;
+import TicTacToe.tictactoe.views.Message;
 import TicTacToe.utils.YesNoDialog;
 
 class ResumeView {
 
-	void interact(ResumeController resumeController) {
-		resumeController.resume(new YesNoDialog().read(MessageView.RESUME.getMessage()));
+	boolean interact(ResumeController resumeController) {
+		boolean isResumed = new YesNoDialog().read(Message.RESUME.toString());
+		if (isResumed){
+			resumeController.resume();
+		} else {
+			resumeController.next();
+		}
+		return isResumed;
 	}
 
 }

@@ -1,31 +1,24 @@
 package TicTacToe.tictactoe.views.console;
 
-import TicTacToe.tictactoe.controllers.PlayController;
 import TicTacToe.tictactoe.models.Coordinate;
+import TicTacToe.utils.Console;
 import TicTacToe.tictactoe.types.Error;
-import TicTacToe.tictactoe.views.MessageView;
-import TicTacToe.utils.WithConsoleView;
 
-class CoordinateView extends WithConsoleView {
+public class CoordinateView {
 
-    PlayController playController;
-
-    CoordinateView(PlayController playController) {
-        this.playController = playController;
-    }
-
-    Coordinate read(String title) {
+    public Coordinate read(String title) {
+        Console console = Console.instance();
         Coordinate coordinate;
+        Error error;
         do {
-			this.console.writeln(title);
-            int row = this.console.readInt(MessageView.READ_ROW.getMessage()) - 1;
-            int column = this.console.readInt(MessageView.READ_COLUMN.getMessage()) - 1;
+			console.writeln(title);
+            int row = console.readInt("Row: ") - 1;
+            int column = console.readInt("Column: ") - 1;
             coordinate = new Coordinate(row, column);
-            assert playController.isCoordinateValid(coordinate);
-            if (!this.playController.isCoordinateValid(coordinate)) {
-                new ErrorView(Error.WRONG_COORDINATES).writeln();
-            }
-        } while (!this.playController.isCoordinateValid(coordinate));
+            error = coordinate.isValid();
+            new ErrorView(error).writeln();
+        } while (!error.isNull());
         return coordinate;
     }
+
 }

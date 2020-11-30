@@ -10,11 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import TicTacToe.tictactoe.controllers.PlayController;
 import TicTacToe.tictactoe.models.Coordinate;
-import TicTacToe.tictactoe.models.Game;
-import TicTacToe.tictactoe.models.State;
-import TicTacToe.tictactoe.views.console.CoordinateView;
 import TicTacToe.utils.Console;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -25,7 +21,7 @@ public class CoordinateViewTest {
     Console console;
 
     @InjectMocks
-    CoordinateView coordinateView = new CoordinateView(new PlayController(new Game(), new State()));
+    CoordinateView coordinateView = new CoordinateView();
 
     @Test
     public void testGivenNewCoordinateViewWhenReadCoordinateThenIsCorrect() {

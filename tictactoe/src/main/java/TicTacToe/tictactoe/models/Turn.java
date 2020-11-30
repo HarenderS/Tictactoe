@@ -1,45 +1,80 @@
 package TicTacToe.tictactoe.models;
 
+import TicTacToe.tictactoe.types.Error;
+import TicTacToe.tictactoe.types.Token;
+
 public class Turn {
 
-	public static final int NUM_PLAYERS = 2;
-
-	private int value;
-
+	public static final int NUMBER_PLAYERS = 2;
 	private Player[] players;
+	private Board board;
+	private int active;
+	private int users;
 
-	public Turn(Player[] players) {
-		this.value = 0;
-		this.players = players;
+	Turn(Board board) {
+		assert board != null;
+
+		this.board = board;
 	}
 
-	public Turn(Turn turn) {
-		this.value = turn.value;
-		this.players = turn.players;
+	void setUsers(int users) {
+		this.users = users;
+		this.board.reset();
+		this.players = new Player[Turn.NUMBER_PLAYERS];
+		for (int i = 0; i < Turn.NUMBER_PLAYERS; i++) {
+			this.players[i] = new Player(Token.get(i), board);
+		}
+		this.active = Turn.NUMBER_PLAYERS - 1;
+	}
+	
+	public Turn(Turn turn, Board board) {
+		this.players = new Player[Turn.NUMBER_PLAYERS];
+		for (int i = 0; i < Turn.NUMBER_PLAYERS; i++) {
+			this.players[i] = turn.players[i].copy(board);
+		}
+		this.board = board;
+		this.active = turn.active;
+		this.users = turn.users;
 	}
 
-	void change() {
-		this.value = this.getOtherValue();
+	public Turn copy(Board board) {
+		return new Turn(this, board);
+	}
+	
+	void set(int active){
+		this.active = active;
 	}
 
-	Player getPlayer() {
-		return this.players[this.value];
+	void next() {
+		this.active = (this.active + 1) % Turn.NUMBER_PLAYERS;
 	}
 
-	int getValue() {
-		return this.value;
+	boolean isUser() {
+		return this.users == 2 || this.users == 1 && this.active == 0;
 	}
 
+	Error put(Coordinate coordinate) {
+		return this.getPlayer().put(coordinate);
+	}
+
+	public Player getPlayer() {
+		return this.players[this.active];
+	}
+
+	Error move(Coordinate origin, Coordinate target) {
+		return this.getPlayer().move(origin, target);
+	}
+
+	Token getToken() {
+		return this.getPlayer().getToken();
+	}
+	
 	private int getOtherValue() {
-		return (this.value + 1) % Turn.NUM_PLAYERS;
+		return (this.active + 1) % Turn.NUMBER_PLAYERS;
 	}
-
+	
 	Player getOtherPlayer() {
 		return this.players[this.getOtherValue()];
-	}
-
-	public Turn copy() {
-		return new Turn(this);
 	}
 
 }

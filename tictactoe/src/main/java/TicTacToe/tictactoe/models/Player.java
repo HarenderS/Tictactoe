@@ -1,63 +1,52 @@
 package TicTacToe.tictactoe.models;
 
 import TicTacToe.tictactoe.types.Error;
-import TicTacToe.tictactoe.types.PlayerType;
 import TicTacToe.tictactoe.types.Token;
 
-public class Player {
+class Player {
 
 	private Token token;
-
 	private Board board;
 
-	private PlayerType type;
+	Player(Token token, Board board) {
+		assert token != null && !token.isNull();
+		assert board != null;
 
-	public Player(Token token, Board board, PlayerType type) {
 		this.token = token;
 		this.board = board;
-		this.type = type;
 	}
 
-	public PlayerType getType() {
-		return this.type;
-	}
-
-	void put(Coordinate coordinate) {
+	Error put(Coordinate coordinate) {
+		if (!this.board.isEmpty(coordinate)) {
+			return Error.NOT_OWNER;
+		}
 		this.board.put(coordinate, this.token);
-	};
+		return Error.NULL;
+	}
 
-	void move(Coordinate[] coordinates) {
-		this.board.move(coordinates[0], coordinates[1]);
-	};
+	Error move(Coordinate origin, Coordinate target) {
+		if (!this.board.isOccupied(origin, this.token)) {
+			return Error.NOT_OWNER;
+		}
+		if (origin.equals(target)) {
+			return Error.SAME_COORDINATES;
+		} else if (!this.board.isEmpty(target)) {
+			return Error.NOT_EMPTY;
+		}
+		this.board.move(origin, target);
+		return Error.NULL;
+	}
 
 	Token getToken() {
 		return this.token;
 	}
-
-	public Error getPutCoordinateError(Coordinate coordinate) {
-		if (!this.board.isEmpty(coordinate)) {
-			return Error.NOT_OWNER;
-		}
-		return null;
+	
+	public Player copy(Board board) {
+		return new Player(this.token, board);
 	}
-
-	public Error getMoveOriginCoordinateError(Coordinate originCoordinate) {
-		if (!this.board.isOccupied(originCoordinate, this.token)) {
-			return Error.NOT_OWNER;
-		}
-		return null;
-	}
-
-	public Error getMoveTargetCoordinateError(Coordinate originCoordinate, Coordinate targetCoordinate) {
-		if (originCoordinate.equals(targetCoordinate)) {
-			return Error.SAME_COORDINATES;
-		} else if (!this.board.isEmpty(targetCoordinate)) {
-			return Error.NOT_EMPTY;
-		}
-		return null;
-	}
-
+	
 	public Board getBoard() {
 		return board;
 	}
+
 }

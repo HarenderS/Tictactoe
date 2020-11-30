@@ -1,9 +1,9 @@
 package TicTacToe.utils;
 
-public class PlayersDialog extends WithConsoleView {
+public class PlayersDialog {
 
 	private static final String USERS_ERROR = "Wrong number of users";
-
+	private Console console = new Console();
 	public int read(int players) {
 		int users = 0;
 		do {

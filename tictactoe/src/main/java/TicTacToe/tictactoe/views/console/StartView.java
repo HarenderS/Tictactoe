@@ -1,17 +1,17 @@
 package TicTacToe.tictactoe.views.console;
 
 import TicTacToe.tictactoe.controllers.StartController;
-import TicTacToe.tictactoe.models.Turn;
-import TicTacToe.tictactoe.views.MessageView;
-import TicTacToe.utils.PlayersDialog;
-import TicTacToe.utils.WithConsoleView;
+import TicTacToe.tictactoe.views.Message;
+import TicTacToe.utils.LimitedIntDialog;
 
-class StartView extends WithConsoleView {
+class StartView {
 
-    void interact(StartController startController) {
-		startController.start();
-		this.console.writeln(MessageView.START_GAME.getMessage());
-		int numberOfUsers = new PlayersDialog().read(Turn.NUM_PLAYERS);
-		startController.createPlayers(numberOfUsers);
+	void interact(StartController startController) {
+		Message.TITTLE.writeln();
+		int users = new LimitedIntDialog(0, 
+		startController.getMaxPlayers()).read(Message.NUMBER_PLAYERS.toString());
+		startController.setUsers(users);
+		new GameView(startController).write();
 	}
+
 }

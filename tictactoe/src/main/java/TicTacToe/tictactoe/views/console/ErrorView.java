@@ -1,7 +1,7 @@
 package TicTacToe.tictactoe.views.console;
 
-import TicTacToe.tictactoe.types.Error;
 import TicTacToe.utils.Console;
+import TicTacToe.tictactoe.types.Error;
 
 class ErrorView extends TicTacToe.tictactoe.views.ErrorView {
 
@@ -10,7 +10,9 @@ class ErrorView extends TicTacToe.tictactoe.views.ErrorView {
 	}
 	
 	void writeln() {
-		new Console().writeln(ErrorView.MESSAGES[this.error.ordinal()]);
+		if (!error.isNull()){
+			Console.instance().writeln(ErrorView.MESSAGES[this.error.ordinal()]);
+		}
 	}
 
 }
