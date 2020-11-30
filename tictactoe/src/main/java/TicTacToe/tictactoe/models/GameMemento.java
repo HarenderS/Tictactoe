@@ -6,7 +6,7 @@ public class GameMemento {
 	private Turn turn;
 	
 	public GameMemento(Board board, Turn turn) {
-		this.board = board;
+		this.board = board.copy();
 		this.turn = turn;
 	}
 

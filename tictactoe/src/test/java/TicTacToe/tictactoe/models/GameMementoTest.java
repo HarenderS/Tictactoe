@@ -27,42 +27,6 @@ public class GameMementoTest {
 	}
 	
 	@Test
-	public void getBoardNullMementoTest() {
-		GameMemento gameMemento = new GameMemento(null,null);
-		assertNull(gameMemento.getBoard());
-	}
-	
-	@Test
-	public void getTurnNullMementoTest() {
-		GameMemento gameMemento = new GameMemento(null,null);
-		assertNull(gameMemento.getTurn());
-	}
-	
-	@Test
-	public void setBoardAndGetNotNullMementoTest() {
-		GameMemento gameMemento = new GameMemento(this.board,this.turn);
-		assertNotNull(gameMemento.getBoard());
-	}
-	
-	@Test
-	public void setTurnAndGetNotNullMementoTest() {
-		GameMemento gameMemento = new GameMemento(this.board,this.turn);
-		assertNotNull(gameMemento.getBoard());
-	}
-	
-	@Test
-	public void setBoardAndGetSameBoardMementoTest() {
-		GameMemento gameMemento = new GameMemento(this.board,this.turn);
-		assertEquals(this.board,gameMemento.getBoard());
-	}
-	
-	@Test
-	public void setTurnAndGetSameTurnMementoTest() {
-		GameMemento gameMemento = new GameMemento(this.board,this.turn);
-		assertEquals(this.turn,gameMemento.getTurn());
-	}
-	
-	@Test
 	public void setBoardAndGetCopyOfBoardMementoTest() {
 		GameMemento gameMemento = new GameMemento(this.board,this.turn);
 		assertNotEquals(this.board,gameMemento.getBoard());

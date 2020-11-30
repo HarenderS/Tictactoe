@@ -111,4 +111,19 @@ public class Board {
 		return this.getToken(coordinate) == token;
 	}
 
+	public Board copy() {
+		return new Board(this);
+	}
+	
+	private Board(Board board) {
+		this();
+		assert board != null;
+
+		for (int i = 0; i < Turn.NUM_PLAYERS; i++) {
+			for (int j = 0; j < Coordinate.DIMENSION; j++) {
+				this.coordinates[i][j] = board.coordinates[i][j];
+			}
+		}
+	}
+
 }
