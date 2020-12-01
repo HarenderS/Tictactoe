@@ -2,7 +2,6 @@ package TicTacToe.tictactoe.models;
 
 import TicTacToe.tictactoe.types.StateValue;
 import TicTacToe.tictactoe.types.Token;
-import TicTacToe.tictactoe.types.Error;
 
 public class Session {
 
@@ -42,13 +41,5 @@ public class Session {
 
 	public void next() {
 		this.state.next();
-	}
-
-	public Error put(Coordinate coordinate) {
-		Error error = this.game.put(coordinate);
-		if (error.isNull()) {
-			this.registry.register();
-		}
-		return error;
 	}
 }
