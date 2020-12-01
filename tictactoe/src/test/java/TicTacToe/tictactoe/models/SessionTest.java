@@ -2,6 +2,7 @@ package TicTacToe.tictactoe.models;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -10,7 +11,6 @@ import TicTacToe.tictactoe.types.Token;
 
 public class SessionTest {
 
-	private Session session = new Session();
 	@Test
 	public void createInitialSessionAndCheckCorrectInitialDataTest() {
 		Session session = new Session();
@@ -39,22 +39,61 @@ public class SessionTest {
 	    assertEquals(StateValue.EXIT, session.getValueState());
 	}
 	
-	private Coordinate at(int row, int col) {
-		return new Coordinate(row, col);
+	@Test
+	public void checkIfSesionPutCoordenatesAndChengePlayerCorrectyTest() {
+		Session session = new Session();
+		session.setUsers(2);
+		assertEquals(Token.X, session.getToken());
+		assertEquals(Token.NULL, session.getToken(at(0, 0)));
+		session.put(at(0, 0));
+		assertEquals(Token.X, session.getToken(at(0, 0)));
+		assertEquals(Token.O, session.getToken());
+
+		assertEquals(Token.NULL, session.getToken(at(0, 1)));
+		session.put(at(0, 1));
+		assertEquals(Token.O, session.getToken(at(0, 1)));
+		assertEquals(Token.X, session.getToken());
 	}
 	
 	@Test
-	public void checkIfSesionPutCoordenatesAndChengePlayerCorrectyTest() {
-		this.session.setUsers(2);
-		assertEquals(Token.X, this.session.getToken());
-		assertEquals(Token.NULL, this.session.getToken(at(0, 0)));
-		this.session.put(at(0, 0));
-		assertEquals(Token.X, this.session.getToken(at(0, 0)));
-		assertEquals(Token.O, this.session.getToken());
+	public void checkIfSesionMoveCoordenatesAndChengePlayerCorrectyTest() {
+		Session session = new Session();
+		session.setUsers(2);
+		session.put(at(0, 0));
+		session.put(at(0, 1));
+		
+		assertEquals(Token.X, session.getToken());
+		assertEquals(Token.X, session.getToken(at(0, 0)));
+		session.move(at(0, 0), at(1, 1));
+		assertEquals(Token.X, session.getToken(at(1, 1)));
+		assertEquals(Token.O, session.getToken());
 
-		assertEquals(Token.NULL, this.session.getToken(at(0, 1)));
-		this.session.put(at(0, 1));
-		assertEquals(Token.O, this.session.getToken(at(0, 1)));
-		assertEquals(Token.X, this.session.getToken());
+		assertEquals(Token.O, session.getToken(at(0, 1)));
+		session.move(at(0, 1), at(2, 2));
+		assertEquals(Token.O, session.getToken(at(2, 2)));
+		assertEquals(Token.X, session.getToken());
+	}
+	
+	@Test
+	public void checkIfIsUndoableSesionTest() {
+		Session session = new Session();
+		session.setUsers(2);
+		session.put(at(0, 0));
+		session.put(at(0, 1));
+		
+		assertTrue(session.isUndoable());
+	}
+	
+	@Test
+	public void checkIfIsNotUndoableSesionTest() {
+		Session session = new Session();
+		session.setUsers(2);
+		
+		assertFalse(session.isUndoable());
+	}
+
+	
+	private Coordinate at(int row, int col) {
+		return new Coordinate(row, col);
 	}
 }
