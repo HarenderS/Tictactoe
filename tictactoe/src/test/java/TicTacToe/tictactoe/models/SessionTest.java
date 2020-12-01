@@ -10,11 +10,12 @@ import TicTacToe.tictactoe.types.Token;
 
 public class SessionTest {
 
+	private Session session = new Session();
 	@Test
 	public void createInitialSessionAndCheckCorrectInitialDataTest() {
 		Session session = new Session();
 		session.setUsers(2);
-		assertEquals(Token.O, session.getToken());
+		assertEquals(Token.X, session.getToken());
 		assertEquals(StateValue.INITIAL, session.getValueState());
 		assertEquals(2, session.getMaxPlayers());
 		assertFalse(session.isBoardComplete());
@@ -40,5 +41,20 @@ public class SessionTest {
 	
 	private Coordinate at(int row, int col) {
 		return new Coordinate(row, col);
+	}
+	
+	@Test
+	public void checkIfSesionPutCoordenatesAndChengePlayerCorrectyTest() {
+		this.session.setUsers(2);
+		assertEquals(Token.X, this.session.getToken());
+		assertEquals(Token.NULL, this.session.getToken(at(0, 0)));
+		this.session.put(at(0, 0));
+		assertEquals(Token.X, this.session.getToken(at(0, 0)));
+		assertEquals(Token.O, this.session.getToken());
+
+		assertEquals(Token.NULL, this.session.getToken(at(0, 1)));
+		this.session.put(at(0, 1));
+		assertEquals(Token.O, this.session.getToken(at(0, 1)));
+		assertEquals(Token.X, this.session.getToken());
 	}
 }
