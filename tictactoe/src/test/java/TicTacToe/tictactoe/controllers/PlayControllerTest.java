@@ -54,52 +54,52 @@ public class PlayControllerTest {
     @Test
     public void testGivenNewPlayControllerWhenPutNewTokenThenGetTokenCharIsValid() {
         this.playController.put(this.coordinate00);
-        assertEquals(Token.O, this.playController.getToken(this.coordinate00));
+        assertEquals(Token.X, this.playController.getToken(this.coordinate00));
     }
 
     @Test
     public void testGivenNewPlayControllerWhenPutNewTokenChangeTurnAndPutAnotherTokenThenGetTokenCharIsValid() {
         this.playController.put(this.coordinate00);
-        assertEquals(Token.O, this.playController.getToken(this.coordinate00));
+        assertEquals(Token.X, this.playController.getToken(this.coordinate00));
         this.playController.put(this.coordinate11);
-        assertEquals(Token.X, this.playController.getToken(this.coordinate11));
+        assertEquals(Token.O, this.playController.getToken(this.coordinate11));
     }
 
     @Test(expected = AssertionError.class)
     public void testGivenNewPlayControllerWhenPutNewTokenOnOccupiedSpaceThenAssertionError() {
         this.playController.put(this.coordinate00);
-        assertEquals(Token.X, this.playController.getToken(this.coordinate00));
+        assertEquals(Token.O, this.playController.getToken(this.coordinate00));
         this.playController.put(this.coordinate11);
-        assertEquals(Token.O, this.playController.getToken(this.coordinate11));
+        assertEquals(Token.X, this.playController.getToken(this.coordinate11));
         this.playController.put(this.coordinate11);
     }
 
     @Test
     public void testGivenNewPlayControllerWhenMoveATokenGetTokenCharTargetAndCheckEmptyTokenOriginThenMovedIsCorrect() {
         this.playController.put(this.coordinate00);
-        assertEquals(Token.O, this.playController.getToken(this.coordinate00));
+        assertEquals(Token.X, this.playController.getToken(this.coordinate00));
         this.playController.put(this.coordinate11);
-        assertEquals(Token.X, this.playController.getToken(this.coordinate11));
+        assertEquals(Token.O, this.playController.getToken(this.coordinate11));
         this.playController.move(this.coordinate00, this.coordinate01);
-        assertEquals(Token.O, this.playController.getToken(this.coordinate01));
+        assertEquals(Token.X, this.playController.getToken(this.coordinate01));
         assertTrue(this.playController.isEmptyToken(this.coordinate00));
     }
 
     @Test(expected = AssertionError.class)
     public void testGivenNewPlayControllerWhenMoveATokenWithOriginEmptyThenAssertionError() {
         this.playController.put(this.coordinate00);
-        assertEquals(Token.X, this.playController.getToken(this.coordinate00));
+        assertEquals(Token.O, this.playController.getToken(this.coordinate00));
         this.playController.put(this.coordinate11);
-        assertEquals(Token.O, this.playController.getToken(this.coordinate11));
+        assertEquals(Token.X, this.playController.getToken(this.coordinate11));
         this.playController.move(new Coordinate(1, 0), this.coordinate01);
     }
 
     @Test(expected = AssertionError.class)
     public void testGivenNewPlayControllerWhenMoveATokenWithTargetOccupiedThenAssertionError() {
         this.playController.put(this.coordinate00);
-        assertEquals(Token.X, this.playController.getToken(this.coordinate00));
+        assertEquals(Token.O, this.playController.getToken(this.coordinate00));
         this.playController.put(this.coordinate11);
-        assertEquals(Token.O, this.playController.getToken(this.coordinate11));
+        assertEquals(Token.X, this.playController.getToken(this.coordinate11));
         this.playController.move(this.coordinate00, this.coordinate11);
     }
 
