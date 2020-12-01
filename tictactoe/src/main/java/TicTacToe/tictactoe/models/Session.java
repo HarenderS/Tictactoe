@@ -70,8 +70,12 @@ public class Session {
 	public boolean isUndoable() {
 		return this.registry.isUndoable();
 	}
-	
+
 	public boolean isRedoable() {
-	    return this.registry.isRedoable();
-	  }
+		return this.registry.isRedoable();
+	}
+
+	public void redo() {
+		this.registry.redo();
+	}
 }
