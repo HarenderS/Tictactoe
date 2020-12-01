@@ -51,7 +51,7 @@ public class GameRegistryTest {
 		assertEquals(Token.NULL, this.game.getToken(at(0, 2)));
 		this.game.put(at(0, 2));
 		this.registry.register();
-		assertEquals(Token.O, this.game.getToken(at(0, 2)));
+		assertEquals(Token.X, this.game.getToken(at(0, 2)));
 
 		this.registry.undo();
 		assertEquals(Token.NULL, this.game.getToken(at(0, 2)));
@@ -66,7 +66,7 @@ public class GameRegistryTest {
 		game1.put(at(1, 1));
 		GameRegistry registry1 = new GameRegistry(game1);
 		registry1.register();
-		assertEquals(Token.O, game1.getToken(at(1, 1)));
+		assertEquals(Token.X, game1.getToken(at(1, 1)));
 		registry1.undo();
 		assertEquals(Token.NULL, game1.getToken(at(0, 2)));
 		
@@ -81,7 +81,18 @@ public class GameRegistryTest {
 		assertFalse(registry1.isRedoable());
 	}
 	
-	
+	@Test
+	public void redoAndCheckIsCorrectRedoTest() {
+		assertEquals(Token.NULL, this.game.getToken(at(1, 1)));
+		this.game.put(at(1, 1));
+		this.registry.register();
+		assertEquals(Token.X, this.game.getToken(at(1, 1)));
+		this.registry.undo();
+		assertEquals(Token.NULL, this.game.getToken(at(1, 1)));
+		this.registry.redo();
+		assertEquals(Token.X, this.game.getToken(at(1, 1)));
+		
+	}
 
 	private Coordinate at(int row, int col) {
 		return new Coordinate(row, col);
