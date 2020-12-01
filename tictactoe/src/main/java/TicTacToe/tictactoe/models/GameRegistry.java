@@ -30,13 +30,15 @@ public class GameRegistry {
 
 	public void undo() {
 		this.firstPrevious++;
-	    this.game.set(this.mementos.get(this.firstPrevious));
+		this.game.set(this.mementos.get(this.firstPrevious));
 	}
 
 	public Boolean isRedoable() {
 		return this.firstPrevious >= 1;
 	}
-	
+
 	public void redo() {
-	  }
+		this.firstPrevious--;
+		this.game.set(this.mementos.get(this.firstPrevious));
+	}
 }
