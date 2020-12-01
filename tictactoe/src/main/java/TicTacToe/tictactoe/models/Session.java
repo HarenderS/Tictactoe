@@ -28,6 +28,10 @@ public class Session {
 		return this.game.getToken();
 	}
 
+	public boolean isUser() {
+		return this.game.isUser();
+	}
+
 	public Token getToken(Coordinate coordinate) {
 		return this.game.getToken(coordinate);
 	}

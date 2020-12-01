@@ -1,59 +1,73 @@
 package TicTacToe.tictactoe.controllers;
 
 import TicTacToe.tictactoe.models.Coordinate;
-import TicTacToe.tictactoe.models.Game;
-import TicTacToe.tictactoe.models.State;
-import TicTacToe.tictactoe.types.Token;
+import TicTacToe.tictactoe.models.Session;
 import TicTacToe.tictactoe.types.Error;
+import TicTacToe.tictactoe.types.Token;
 
-public class PlayController extends UseCaseController {
+public class PlayController extends UseCaseController implements AcceptorController{
 
-	public PlayController(Game game, State state) {
-		super(game, state);
+	private ActionController actionController;
+	private UndoController undoController;
+	private RedoController redoController;
+
+	public PlayController(Session session) {
+		super(session);
+		this.actionController = new ActionController(session);
+		this.undoController = new UndoController(session);
+		this.redoController = new RedoController(session);
 	}
 
 	public boolean isBoardComplete() {
-		return this.game.isBoardComplete();
+		return this.actionController.isBoardComplete();
 	}
 
 	public boolean isTicTacToe() {
-		return this.game.isTicTacToe();
+		return this.actionController.isTicTacToe();
 	}
 
 	public Token getToken() {
-		return this.game.getToken();
+		return this.actionController.getToken();
 	}
 
 	public boolean isUser() {
-		return this.game.isUser();
+		return this.actionController.isUser();
 	}
 
 	public Error put(Coordinate coordinate) {
-		Error error = this.game.put(coordinate);
-		if (error.isNull() && this.game.isTicTacToe()) {
-			this.state.nextState();
-		}
-		return error;
+		return this.actionController.put(coordinate);
 	}
 
 	public Error move(Coordinate origin, Coordinate target) {
-		Error error = this.game.move(origin, target);
-		if (error.isNull() && this.game.isTicTacToe()) {
-			this.state.nextState();
-		}
-		return error;
+		return this.actionController.move(origin, target);
+	}
+
+	public void undo() {
+		this.undoController.undo();
+	}
+
+	public boolean undoable() {
+		return this.undoController.undoable();
+	}
+
+	public void redo() {
+		this.redoController.redo();
+	}
+
+	public boolean redoable() {
+		return this.redoController.redoable();
 	}
 
 	public Error isCoordinateValid(Coordinate coordinate) {
-		return coordinate.isValid();
+		return this.actionController.isCoordinateValid(coordinate);
 	}
 
 	public boolean isEmptyToken(Coordinate coordinate) {
-		return this.game.getToken(coordinate) == Token.NULL;
+		return this.actionController.isEmptyToken(coordinate);
 	}
 	
 	public int getCoordinateDimension() {
-		return Coordinate.DIMENSION;
+		return this.actionController.getCoordinateDimension();
 	}
 	
 	@Override

@@ -7,8 +7,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import TicTacToe.tictactoe.models.Coordinate;
-import TicTacToe.tictactoe.models.Game;
-import TicTacToe.tictactoe.models.State;
+import TicTacToe.tictactoe.models.Session;
 import TicTacToe.tictactoe.types.Error;
 import TicTacToe.tictactoe.types.Token;
 
@@ -16,16 +15,16 @@ public class PlayControllerTest {
     
     private PlayController playController;
 
-    private Game game;
+    private Session session;
 
     private Coordinate coordinate00;
     private Coordinate coordinate11;
     private Coordinate coordinate01;
 
     public PlayControllerTest() {
-        this.game = new Game();
-        this.game.setUsers(0);
-        this.playController = new PlayController(this.game, new State());
+        this.session = new Session();
+        this.session.setUsers(0);
+        this.playController = new PlayController(this.session);
         this.coordinate00 = new Coordinate(0, 0);
         this.coordinate11 = new Coordinate(1, 1);
         this.coordinate01 = new Coordinate(0, 1);

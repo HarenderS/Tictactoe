@@ -1,7 +1,7 @@
 package TicTacToe.tictactoe;
 
+import TicTacToe.tictactoe.controllers.AcceptorController;
 import TicTacToe.tictactoe.controllers.Logic;
-import TicTacToe.tictactoe.controllers.UseCaseController;
 import TicTacToe.tictactoe.views.View;
 
 public abstract class TicTacToe {
@@ -17,7 +17,7 @@ public abstract class TicTacToe {
     protected abstract View createView();
 
     protected void play() {
-        UseCaseController controller;
+        AcceptorController controller;
 		do {
             controller = this.logic.getController();
             if (controller != null) {

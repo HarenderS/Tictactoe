@@ -1,28 +1,23 @@
 package TicTacToe.tictactoe.controllers;
 
 import TicTacToe.tictactoe.models.Coordinate;
-import TicTacToe.tictactoe.models.Game;
-import TicTacToe.tictactoe.models.State;
+import TicTacToe.tictactoe.models.Session;
 import TicTacToe.tictactoe.types.Token;
 
 public abstract class UseCaseController {
 
-	protected Game game;
-	protected State state;
+	protected Session session;
 
-	UseCaseController(Game game, State state) {
-		this.game = game;
-		this.state = state;
+	UseCaseController(Session session) {
+		this.session = session;
+	}
+	
+	public void nextState() {
+		this.session.nextState();
 	}
 
 	public Token getToken(Coordinate coordinate) {
-		return this.game.getToken(coordinate);
+		return this.session.getToken(coordinate);
 	}
-
-	public void nextState() {
-		this.state.nextState();
-	}
-
-	public abstract void accept(ControllerVisitor controllerVisitor);
 
 }

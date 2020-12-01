@@ -1,23 +1,20 @@
-package TicTacToe.tictactoe.controllers
-;
+package TicTacToe.tictactoe.controllers;
 
-import TicTacToe.tictactoe.models.Game;
-import TicTacToe.tictactoe.models.State;
+import TicTacToe.tictactoe.models.Session;
 
-public class ResumeController extends UseCaseController {
+public class ResumeController extends UseCaseController implements AcceptorController {
 
-  ResumeController(Game game, State state) {
-    super(game, state);
-  }
+	ResumeController(Session session) {
+		super(session);
+	}
 
-  public void resume(){
-    this.game.reset();
-    this.state.reset();
-  }
-  
-  @Override
-  public void accept(ControllerVisitor controllerVisitor) {
-    controllerVisitor.visit(this);
-  }
-  
+	public void resume() {
+		this.session.reset();
+	}
+
+	@Override
+	public void accept(ControllerVisitor controllerVisitor) {
+		controllerVisitor.visit(this);
+	}
+
 }

@@ -1,10 +1,10 @@
 package TicTacToe.tictactoe.views.console;
 
+import TicTacToe.tictactoe.controllers.AcceptorController;
 import TicTacToe.tictactoe.controllers.ControllerVisitor;
 import TicTacToe.tictactoe.controllers.PlayController;
 import TicTacToe.tictactoe.controllers.ResumeController;
 import TicTacToe.tictactoe.controllers.StartController;
-import TicTacToe.tictactoe.controllers.UseCaseController;
 
 public class View extends TicTacToe.tictactoe.views.View implements ControllerVisitor {
 
@@ -19,7 +19,7 @@ public class View extends TicTacToe.tictactoe.views.View implements ControllerVi
 	}
 
 	@Override
-	public void interact(UseCaseController controller) {
+	public void interact(AcceptorController controller) {
 		controller.accept(this);
 	}
 
