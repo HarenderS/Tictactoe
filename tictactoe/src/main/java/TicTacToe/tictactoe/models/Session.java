@@ -38,4 +38,8 @@ public class Session {
 	public StateValue getValueState() {
 		return this.state.getValueState();
 	}
+
+	public void next() {
+		this.state.next();
+	}
 }

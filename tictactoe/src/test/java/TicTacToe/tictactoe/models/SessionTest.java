@@ -1,7 +1,7 @@
 package TicTacToe.tictactoe.models;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import org.junit.Test;
 
@@ -23,6 +23,19 @@ public class SessionTest {
 				assertEquals(Token.NULL, session.getToken(at(i, j)));
 			}
 		}
+	}
+	
+	@Test
+	public void checkIfStateChangedCorrectyTest() {
+		Session session = new Session();
+		session.setUsers(2);
+	    assertEquals(StateValue.INITIAL, session.getValueState());
+	    session.next();
+	    assertEquals(StateValue.IN_GAME, session.getValueState());
+	    session.next();
+	    assertEquals(StateValue.RESUME, session.getValueState());
+	    session.next();
+	    assertEquals(StateValue.EXIT, session.getValueState());
 	}
 	
 	private Coordinate at(int row, int col) {
