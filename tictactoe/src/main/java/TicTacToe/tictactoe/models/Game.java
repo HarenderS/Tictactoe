@@ -30,17 +30,17 @@ public class Game {
 	}
 
     public Error put(Coordinate coordinate) {
-        return this.turn.put(coordinate);
+    	Error error = this.turn.put(coordinate);
+        if (error.isNull() && !this.board.isTicTacToe(this.turn.getToken())){
+            this.turn.nextTurn(); 
+        }
+        return error;
     }
 
     public Error move(Coordinate origin, Coordinate target) {
         return this.turn.move(origin, target);
     }
 
-    public void next() {
-        this.turn.next();
-    }
-    
     public GameMemento createMemento() {
         return new GameMemento(this.board, this.turn);
 	}

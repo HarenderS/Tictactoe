@@ -12,10 +12,6 @@ public class PlayController extends UseCaseController {
 		super(game, state);
 	}
 
-	public void next() {
-		this.game.next();
-	}
-
 	public boolean isBoardComplete() {
 		return this.game.isBoardComplete();
 	}

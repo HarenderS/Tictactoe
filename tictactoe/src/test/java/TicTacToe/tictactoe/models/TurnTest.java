@@ -24,7 +24,7 @@ public class TurnTest {
     public void testGivenNewTurnWhenChangeTurnThenIsOtherTurn() {
         assertEquals(this.players[1].getToken(), this.turn.getPlayer().getToken());
         assertEquals(this.players[0].getToken(), this.turn.getOtherPlayer().getToken());
-        this.turn.next();
+        this.turn.nextTurn();
         assertEquals(this.players[0].getToken(), this.turn.getPlayer().getToken());
         assertEquals(this.players[1].getToken(), this.turn.getOtherPlayer().getToken());
     }
@@ -33,10 +33,10 @@ public class TurnTest {
     public void testGivenNewTurnWhenChangeTurnTwoTimesThenIsTheSameTurn() {
         assertEquals(this.players[1].getToken(), this.turn.getPlayer().getToken());
         assertEquals(this.players[0].getToken(), this.turn.getOtherPlayer().getToken());
-        this.turn.next();
+        this.turn.nextTurn();
         assertEquals(this.players[0].getToken(), this.turn.getPlayer().getToken());
         assertEquals(this.players[1].getToken(), this.turn.getOtherPlayer().getToken());
-        this.turn.next();
+        this.turn.nextTurn();
         assertEquals(this.players[1].getToken(), this.turn.getPlayer().getToken());
         assertEquals(this.players[0].getToken(), this.turn.getOtherPlayer().getToken());
     }

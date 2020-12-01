@@ -45,7 +45,7 @@ public class Turn {
 		this.active = active;
 	}
 
-	void next() {
+	void nextTurn() {
 		this.active = (this.active + 1) % Turn.NUMBER_PLAYERS;
 	}
 
