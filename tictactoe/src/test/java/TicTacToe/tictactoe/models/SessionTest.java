@@ -107,6 +107,28 @@ public class SessionTest {
 		
 	}
 	
+	@Test
+	public void checkIfIsRedoableSesionTest() {
+		Session session = new Session();
+		session.setUsers(2);
+		session.put(at(0, 0));
+		session.put(at(0, 1));
+		
+		assertFalse(session.isRedoable());
+		
+		session.undo();
+		
+		assertTrue(session.isRedoable());
+	}
+	
+	@Test
+	public void checkIfIsNotRedoableSesionTest() {
+		Session session = new Session();
+		session.setUsers(2);
+		
+		assertFalse(session.isRedoable());
+	}
+	
 	private Coordinate at(int row, int col) {
 		return new Coordinate(row, col);
 	}
