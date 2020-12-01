@@ -33,25 +33,25 @@ public class GameMementoTest {
 	}
 	
 	@Test
-	public void setTurnWithPlayerChangedAndGetCopyMementoTest() {
+	public void setTurnWithSamePlayerAndGetCopyMementoTest() {
 		GameMemento gameMemento1 = new GameMemento(this.board,this.turn);
 		
-		this.turn.next();
 		GameMemento gameMemento2 = new GameMemento(this.board,this.turn);
 		
 		assertNotEquals(this.turn.getPlayer(),gameMemento1.getTurn().getPlayer());
+		assertNotEquals(this.turn.getPlayer(),gameMemento2.getTurn().getPlayer());
 		assertNotEquals(gameMemento1.getTurn().getPlayer(),gameMemento2.getTurn().getPlayer());
-		assertEquals(this.turn.getOtherPlayer(),gameMemento1.getTurn().getPlayer());
-		assertEquals(this.turn.getPlayer(),gameMemento2.getTurn().getPlayer());
+		assertNotEquals(this.turn.getOtherPlayer(),gameMemento1.getTurn().getPlayer());
+		assertNotEquals(this.turn.getOtherPlayer(),gameMemento2.getTurn().getPlayer());
 	}
 	
 	@Test
-	public void setTurnWithBoardChangedAndGetPlayerBoardChangedMementoTest() {
+	public void setTurnWithBoardChangedAndGetPlayerBoardCopiedMementoTest() {
 		this.board.put(new Coordinate(1, 2), Token.X);
 		
 		GameMemento gameMemento = new GameMemento(this.board,this.turn);
 		
-		assertEquals(this.turn.getPlayer(),gameMemento.getTurn().getPlayer());
-		assertEquals(this.board, gameMemento.getTurn().getPlayer().getBoard());
+		assertNotEquals(this.turn.getPlayer(),gameMemento.getTurn().getPlayer());
+		assertNotEquals(this.board, gameMemento.getTurn().getPlayer().getBoard());
 	}
 }

@@ -69,7 +69,9 @@ class Board {
 		assert origin != null && !origin.isNull();
 		assert target != null && !target.isNull();
 		assert !origin.equals(target);
-
+		assert !this.isEmpty(origin);
+		assert this.isEmpty(target);
+		
 		Token token = this.getToken(origin);
 		this.remove(origin);
 		this.put(target, token);

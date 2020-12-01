@@ -17,26 +17,27 @@ public class TurnTest {
         this.players[0] = new Player(Token.values()[0], board);
         this.players[1] = new Player(Token.values()[1], board);
         this.turn = new Turn(board);
+        this.turn.setUsers(2);
     }
 
     @Test
     public void testGivenNewTurnWhenChangeTurnThenIsOtherTurn() {
-        assertEquals(this.players[0].getToken(), this.turn.getPlayer().getToken());
-        assertEquals(this.players[1].getToken(), this.turn.getOtherPlayer().getToken());
-        this.turn.next();
         assertEquals(this.players[1].getToken(), this.turn.getPlayer().getToken());
         assertEquals(this.players[0].getToken(), this.turn.getOtherPlayer().getToken());
+        this.turn.next();
+        assertEquals(this.players[0].getToken(), this.turn.getPlayer().getToken());
+        assertEquals(this.players[1].getToken(), this.turn.getOtherPlayer().getToken());
     }
 
     @Test
     public void testGivenNewTurnWhenChangeTurnTwoTimesThenIsTheSameTurn() {
-        assertEquals(this.players[0].getToken(), this.turn.getPlayer().getToken());
-        assertEquals(this.players[1].getToken(), this.turn.getOtherPlayer().getToken());
-        this.turn.next();
         assertEquals(this.players[1].getToken(), this.turn.getPlayer().getToken());
         assertEquals(this.players[0].getToken(), this.turn.getOtherPlayer().getToken());
         this.turn.next();
         assertEquals(this.players[0].getToken(), this.turn.getPlayer().getToken());
         assertEquals(this.players[1].getToken(), this.turn.getOtherPlayer().getToken());
+        this.turn.next();
+        assertEquals(this.players[1].getToken(), this.turn.getPlayer().getToken());
+        assertEquals(this.players[0].getToken(), this.turn.getOtherPlayer().getToken());
     }
 }
