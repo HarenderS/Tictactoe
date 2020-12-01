@@ -43,11 +43,15 @@ public class Session {
 	public void nextState() {
 		this.state.nextState();
 	}
-	
+
 	public void reset() {
-	    this.game.reset();
-	    this.state.reset();
-	  }
+		this.game.reset();
+		this.state.reset();
+	}
+
+	public boolean isTicTacToe() {
+		return this.game.isTicTacToe();
+	}
 
 	public Error put(Coordinate coordinate) {
 		Error error = this.game.put(coordinate);

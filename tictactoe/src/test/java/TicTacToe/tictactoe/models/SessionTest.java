@@ -154,9 +154,26 @@ public class SessionTest {
 		
 		session.reset();
 		assertEquals(StateValue.INITIAL, session.getValueState());
-		assertFalse(session.isBoardComplete());
 		assertEquals(Token.NULL, session.getToken(at(0, 0)));
 		
+	}
+	
+	@Test
+	public void playAndWinAndCheckIfItFinishedCorrectyTest() {
+		Session session = new Session();
+		session.setUsers(2);
+		assertFalse(session.isTicTacToe());
+		assertEquals(Token.X, session.getToken());
+		session.put(at(0, 0));
+		assertEquals(Token.O, session.getToken());
+		session.put(at(1, 0));
+		assertEquals(Token.X, session.getToken());
+		session.put(at(0, 1));
+		assertEquals(Token.O, session.getToken());
+		session.put(at(1, 1));
+		assertEquals(Token.X, session.getToken());
+		session.put(at(0, 2));
+		assertTrue(session.isTicTacToe());
 	}
 	
 	private Coordinate at(int row, int col) {
