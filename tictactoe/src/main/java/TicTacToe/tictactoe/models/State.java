@@ -14,7 +14,7 @@ public class State {
 		this.stateValue = StateValue.INITIAL;
 	}
 
-	public void next() {
+	public void nextState() {
 		this.stateValue = StateValue.values()[this.stateValue.ordinal() + 1];
 	}
 

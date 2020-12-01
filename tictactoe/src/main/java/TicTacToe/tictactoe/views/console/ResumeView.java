@@ -11,7 +11,7 @@ class ResumeView {
 		if (isResumed){
 			resumeController.resume();
 		} else {
-			resumeController.next();
+			resumeController.nextState();
 		}
 		return isResumed;
 	}

@@ -11,7 +11,7 @@ public class StartController extends UseCaseController {
 
   public void setUsers(int users) {
     this.game.setUsers(users);
-    this.state.next();
+    this.state.nextState();
   }
 
   public int getMaxPlayers() {

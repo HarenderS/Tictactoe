@@ -19,8 +19,8 @@ public abstract class UseCaseController {
 		return this.game.getToken(coordinate);
 	}
 
-	public void next() {
-		this.state.next();
+	public void nextState() {
+		this.state.nextState();
 	}
 
 	public abstract void accept(ControllerVisitor controllerVisitor);

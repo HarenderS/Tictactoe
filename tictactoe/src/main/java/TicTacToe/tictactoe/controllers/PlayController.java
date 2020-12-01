@@ -31,7 +31,7 @@ public class PlayController extends UseCaseController {
 	public Error put(Coordinate coordinate) {
 		Error error = this.game.put(coordinate);
 		if (error.isNull() && this.game.isTicTacToe()) {
-			this.state.next();
+			this.state.nextState();
 		}
 		return error;
 	}
@@ -39,7 +39,7 @@ public class PlayController extends UseCaseController {
 	public Error move(Coordinate origin, Coordinate target) {
 		Error error = this.game.move(origin, target);
 		if (error.isNull() && this.game.isTicTacToe()) {
-			this.state.next();
+			this.state.nextState();
 		}
 		return error;
 	}

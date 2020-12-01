@@ -40,6 +40,6 @@ public class Session {
 	}
 
 	public void next() {
-		this.state.next();
+		this.state.nextState();
 	}
 }

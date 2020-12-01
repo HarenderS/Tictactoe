@@ -24,7 +24,7 @@ public class Turn {
 		for (int i = 0; i < Turn.NUMBER_PLAYERS; i++) {
 			this.players[i] = new Player(Token.get(i), board);
 		}
-		this.active = Turn.NUMBER_PLAYERS - 1;
+		this.active = 0;
 	}
 	
 	public Turn(Turn turn, Board board) {

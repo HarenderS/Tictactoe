@@ -22,22 +22,22 @@ public class StateTest {
 
     @Test
     public void testGivenNewStateWhenDoNextAndGetValueStateThenIsInGame() {
-        this.state.next();
+        this.state.nextState();
         assertEquals(StateValue.IN_GAME, this.state.getValueState());
     }
 
     @Test
     public void testGivenNewStateWhenDoTwoNextAndGetValueStateThenIsResult() {
-        this.state.next();
-        this.state.next();
+        this.state.nextState();
+        this.state.nextState();
         assertEquals(StateValue.RESUME, this.state.getValueState());
     }
 
     @Test
     public void testGivenNewStateWhenDoThreeNextAndGetValueStateThenIsExit() {
-        this.state.next();
-        this.state.next();
-        this.state.next();
+        this.state.nextState();
+        this.state.nextState();
+        this.state.nextState();
         assertEquals(StateValue.EXIT, this.state.getValueState());
     }
 }

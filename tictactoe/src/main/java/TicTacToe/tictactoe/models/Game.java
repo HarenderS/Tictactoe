@@ -38,7 +38,11 @@ public class Game {
     }
 
     public Error move(Coordinate origin, Coordinate target) {
-        return this.turn.move(origin, target);
+    	Error error = this.turn.move(origin, target);
+        if (error.isNull() && !this.board.isTicTacToe(this.turn.getToken())){
+            this.turn.nextTurn();
+        }
+        return error;
     }
 
     public GameMemento createMemento() {
