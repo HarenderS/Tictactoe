@@ -40,9 +40,14 @@ public class Session {
 		return this.state.getValueState();
 	}
 
-	public void next() {
+	public void nextState() {
 		this.state.nextState();
 	}
+	
+	public void reset() {
+	    this.game.reset();
+	    this.state.reset();
+	  }
 
 	public Error put(Coordinate coordinate) {
 		Error error = this.game.put(coordinate);

@@ -32,11 +32,11 @@ public class SessionTest {
 		Session session = new Session();
 		session.setUsers(2);
 	    assertEquals(StateValue.INITIAL, session.getValueState());
-	    session.next();
+	    session.nextState();
 	    assertEquals(StateValue.IN_GAME, session.getValueState());
-	    session.next();
+	    session.nextState();
 	    assertEquals(StateValue.RESUME, session.getValueState());
-	    session.next();
+	    session.nextState();
 	    assertEquals(StateValue.EXIT, session.getValueState());
 	}
 	
@@ -138,6 +138,24 @@ public class SessionTest {
 		assertEquals(Token.NULL, session.getToken(at(0, 1)));
 		session.redo();
 		assertNotEquals(Token.NULL, session.getToken(at(0, 1)));
+		
+	}
+	
+	@Test
+	public void checkIfItResertSesionCorrectyTest() {
+		Session session = new Session();
+		session.setUsers(2);
+		session.put(at(0, 0));
+		assertNotEquals(Token.NULL, session.getToken(at(0, 0)));
+		assertEquals(Token.O, session.getToken());
+		session.nextState();
+		assertNotEquals(StateValue.INITIAL, session.getValueState());
+		
+		
+		session.reset();
+		assertEquals(StateValue.INITIAL, session.getValueState());
+		assertFalse(session.isBoardComplete());
+		assertEquals(Token.NULL, session.getToken(at(0, 0)));
 		
 	}
 	
