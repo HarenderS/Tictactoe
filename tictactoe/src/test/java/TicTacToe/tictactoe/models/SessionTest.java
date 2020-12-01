@@ -2,7 +2,10 @@ package TicTacToe.tictactoe.models;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.Test;
 
@@ -92,6 +95,17 @@ public class SessionTest {
 		assertFalse(session.isUndoable());
 	}
 
+	@Test
+	public void checkIfItUndoSesionCorrectyTest() {
+		Session session = new Session();
+		session.setUsers(2);
+		session.put(at(0, 0));
+		session.put(at(0, 1));
+		assertNotEquals(Token.NULL, session.getToken(at(0, 1)));
+		session.undo();
+		assertEquals(Token.NULL, session.getToken(at(0, 1)));
+		
+	}
 	
 	private Coordinate at(int row, int col) {
 		return new Coordinate(row, col);

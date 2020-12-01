@@ -59,8 +59,15 @@ public class Session {
 		}
 		return error;
 	}
-	
+
+	public void undo() {
+		this.registry.undo();
+		if (!this.game.isUser()) {
+			this.registry.undo();
+		}
+	}
+
 	public boolean isUndoable() {
-	    return this.registry.isUndoable();
-	  }
+		return this.registry.isUndoable();
+	}
 }
